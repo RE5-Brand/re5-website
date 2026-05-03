@@ -1325,35 +1325,30 @@
 
   /* ====== PHOTO PLACEHOLDERS ====== */
   .photo-placeholder {
-    border-radius: 12px;
+    border-radius: 8px;
     border: 1px solid var(--border);
-    background: linear-gradient(135deg, var(--paper) 0%, #F0EDE6 100%);
+    background: linear-gradient(135deg, #FAFAF7 0%, #F0EDE5 50%, #E8E4D8 100%);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px 32px;
     position: relative;
     overflow: hidden;
   }
-  .photo-placeholder-tag {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    color: var(--saffron);
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: 16px;
+  .photo-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border: 1px dashed var(--border);
+    border-radius: 4px;
+    pointer-events: none;
   }
-  .photo-placeholder-desc {
+  .photo-pending-label {
     font-family: "IBM Plex Mono", monospace;
-    font-size: 10px;
-    letter-spacing: 0.1em;
+    font-size: 11px;
+    letter-spacing: 0.18em;
     color: var(--stone);
     text-transform: uppercase;
-    line-height: 1.7;
-    max-width: 700px;
-    text-align: center;
+    opacity: 0.4;
   }
   .photo-placeholder.landscape { aspect-ratio: 21/9; }
   .photo-placeholder.portrait { aspect-ratio: 4/5; max-width: 400px; }
@@ -1409,9 +1404,9 @@
   </div>
   <div class="nav-links">
     <a href="#system">System</a>
-    <a href="#cta">Book</a>
-    <a href="#">Masterclass</a>
-    <a href="#cta" class="btn btn-primary">Get the Book — $1</a>
+    <a href="/book">Book</a>
+    <a href="/masterclass">Masterclass</a>
+    <a href="https://payhip.com/RE5-PLACEHOLDER" class="btn btn-primary">Get the Book — $1</a>
   </div>
 </nav>
 
@@ -1429,7 +1424,7 @@
     </div>
 
     <div class="hero-ctas">
-      <a href="#cta" class="btn btn-primary">Get the Book — $1 →</a>
+      <a href="https://payhip.com/RE5-PLACEHOLDER" class="btn btn-primary">Get the Book — $1 →</a>
       <a href="#system" class="btn btn-secondary">See the RE5 System</a>
     </div>
     <div class="hero-note">Less noise. More follicles.</div>
@@ -1444,9 +1439,9 @@
 
 <!-- PHOTO PLACEHOLDER 1 — Hero desk shot -->
 <div style="padding:0 5vw;max-width:1280px;margin:0 auto;">
+  <!-- Photo: Solomon's working desk in Bangkok. Open notebook with handwritten driver diagrams, microscope on left, ceramic bowl of dried Eastern herbs (Nu Zhen Zi, white peony), small amber dropper bottles of peptide serum, derma roller resting on parchment. Warm afternoon light from a window. Shot on lab-paper coloured surface. Overhead 3/4 angle. 1600×686px. -->
   <div class="photo-placeholder landscape">
-    <div class="photo-placeholder-tag">Photo to Add · 21:9 Landscape</div>
-    <div class="photo-placeholder-desc">Solomon's working desk in Bangkok. Open notebook with handwritten driver diagrams, microscope on left, ceramic bowl of dried Eastern herbs (Nu Zhen Zi, white peony), small amber dropper bottles of peptide serum, derma roller resting on parchment. Warm afternoon light from a window. Shot on lab-paper coloured surface. Overhead 3/4 angle. 1600×686px.</div>
+    <span class="photo-pending-label">Image Pending</span>
   </div>
 </div>
 
@@ -1608,9 +1603,9 @@
   <h2 class="ew-heading">The <span class="hl-celadon">East</span> prepares the ground.<br>The <span class="hl-saffron">West</span> activates the growth.</h2>
   <p class="subhead">Most protocols choose a side. RE5 runs <strong>both</strong> — because the biology doesn't care which tradition observed it first.</p>
 
+  <!-- Photo: Two-zone composition. LEFT zone: Eastern botanicals — dried roots in ceramic bowls, traditional medicine paper packaging, dried herbs in glass apothecary jars. RIGHT zone: Western tools — derma roller, LLLT laser cap, peptide serum dropper bottles. Both zones unified by warm natural overhead light, lab-paper background. Reads as 'East meets West' without literal division. 1600×686px. -->
   <div class="photo-placeholder landscape" style="margin-bottom:40px;">
-    <div class="photo-placeholder-tag">Photo to Add · 21:9 Landscape</div>
-    <div class="photo-placeholder-desc">Two-zone composition. LEFT zone: Eastern botanicals — dried roots in ceramic bowls, traditional medicine paper packaging, dried herbs in glass apothecary jars. RIGHT zone: Western tools — derma roller, LLLT laser cap, peptide serum dropper bottles. Both zones unified by warm natural overhead light, lab-paper background. Reads as 'East meets West' without literal division. 1600×686px.</div>
+    <span class="photo-pending-label">Image Pending</span>
   </div>
 
   <div class="ew-grid">
@@ -1701,7 +1696,7 @@
     <div class="eyebrow">Ready?</div>
     <h2 class="heading">The whole map. $1.</h2>
     <p class="mid-cta-sub">Eight drivers. Forty tools. One coffee. Skip the guessing — get the RE5 map I had to build through trial and error.</p>
-    <a href="#cta" class="btn btn-primary">Get the Book — $1 →</a>
+    <a href="https://payhip.com/RE5-PLACEHOLDER" class="btn btn-primary">Get the Book — $1 →</a>
   </div>
 </section>
 
@@ -1743,9 +1738,9 @@
   <h2 class="heading">What execution looks like.</h2>
   <p class="subhead">The RE5 30/70 isn't a single action. It's a rhythm — daily, weekly, and monthly layers that compound.</p>
 
+  <!-- Photo: Close-up overhead shot of bathroom counter. Small ceramic dish with supplement stack laid out (capsules in three small piles), microneedling derma stamp in case, amber bottle of scalp oil with dropper, glass of water, folded handwritten daily routine note. Warm morning light. Lab-paper colour palette. Reads as 'this is what your morning looks like running the protocol.' 1200×900px. -->
   <div class="photo-placeholder detail" style="margin-bottom:40px;">
-    <div class="photo-placeholder-tag">Photo to Add · 4:3 Detail</div>
-    <div class="photo-placeholder-desc">Close-up overhead shot of bathroom counter. Small ceramic dish with supplement stack laid out (capsules in three small piles), microneedling derma stamp in case, amber bottle of scalp oil with dropper, glass of water, folded handwritten daily routine note. Warm morning light. Lab-paper colour palette. Reads as 'this is what your morning looks like running the protocol.' 1200×900px.</div>
+    <span class="photo-pending-label">Image Pending</span>
   </div>
 
   <div class="cadence-grid">
@@ -1870,7 +1865,7 @@
       <div class="mc-bar-title">The RE5 Masterclass — the full system on video.</div>
       <div class="mc-bar-desc">All 6 protocol variants (Natural, Hybrid, Pharma · Men + Women). The complete supplement architecture. Six day-in-the-life walkthroughs. Master tool table with scored alternatives. The same framework — fully expanded.</div>
     </div>
-    <a href="#" class="btn btn-dark">Explore the Masterclass →</a>
+    <a href="/masterclass" class="btn btn-dark">Explore the Masterclass →</a>
   </div>
 </section>
 
@@ -1895,9 +1890,9 @@
 <!-- ========== SECTION 13 — SOLOMON ========== -->
 <section class="section">
   <div class="solomon-grid">
+    <!-- Photo: Editorial portrait of Solomon. 3/4 angle. Quiet, considered, not smiling. Looking slightly off-camera. Solid-color shirt (navy, charcoal, or dark teal). Out-of-focus warm neutral background. Single soft window light from left, gentle shadow on right. Hardcover book author photo register, not corporate or social. 1200×1500px. -->
     <div class="photo-placeholder portrait">
-      <div class="photo-placeholder-tag">Photo to Add · 4:5 Portrait</div>
-      <div class="photo-placeholder-desc">Editorial portrait of Solomon. 3/4 angle. Quiet, considered, not smiling. Looking slightly off-camera. Solid-color shirt (navy, charcoal, or dark teal). Out-of-focus warm neutral background. Single soft window light from left, gentle shadow on right. Hardcover book author photo register, not corporate or social. 1200×1500px.</div>
+      <span class="photo-pending-label">Image Pending</span>
     </div>
 
     <div>
@@ -1956,14 +1951,14 @@
     <p class="final-sub">The Natural Hair Regrowth System — Men's Edition. Get the whole map for $1, or get the free 8 Drivers Checklist if you're not ready.</p>
 
     <div class="final-row">
-      <a href="#" class="btn btn-primary">Get the Book — $1 →</a>
+      <a href="https://payhip.com/RE5-PLACEHOLDER" class="btn btn-primary">Get the Book — $1 →</a>
     </div>
 
     <div class="final-divider"><span>or</span></div>
 
     <div class="final-row">
       <input type="email" class="email-input" placeholder="your@email.com">
-      <a href="#" class="btn btn-secondary" style="color:var(--paper);border-color:rgba(255,255,255,0.25);">Free Checklist →</a>
+      <a href="https://baldresearch.kit.com/8-drivers-checklist" class="btn btn-secondary" style="color:var(--paper);border-color:rgba(255,255,255,0.25);">Free Checklist →</a>
     </div>
 
     <div class="final-trust">Stripe Secured · Instant Download · Satisfaction Guaranteed</div>
@@ -1976,10 +1971,10 @@
     <div class="footer-tagline">Less noise. More follicles.</div>
   </div>
   <div class="footer-links">
-    <a href="#">Privacy</a>
-    <a href="#">Terms</a>
-    <a href="#">Contact</a>
-    <a href="#">Masterclass</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="mailto:hello@re5.com">Contact</a>
+    <a href="/masterclass">Masterclass</a>
   </div>
   <div class="footer-copy">Published by Bald Research · © 2026 · Vol 03 · The Natural Hair Regrowth System, Men's Edition</div>
 </footer>
