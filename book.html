@@ -1,0 +1,1988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RE5 — The Natural Hair Regrowth System, Men's Edition</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAFAF7;
+    --ink: #1A1A1A;
+    --saffron: #E8893D;
+    --celadon: #2F5F6B;
+    --stone: #8A8578;
+    --soft: #5C5852;
+    --border: #E0DDD5;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    font-family: "Nunito Sans", sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ====== SHARED ====== */
+  .section {
+    padding: clamp(48px, 6vw, 80px) 5vw;
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--saffron);
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    display: block;
+  }
+  .eyebrow.celadon { color: var(--celadon); }
+  .heading {
+    font-size: clamp(31px, 4.4vw, 46px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .subhead {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--soft);
+    max-width: 600px;
+  }
+  .hl-saffron { color: var(--saffron); }
+  .hl-celadon { color: var(--celadon); }
+
+  .btn {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    padding: 14px 28px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  .btn-primary { color: var(--paper); background: var(--saffron); }
+  .btn-primary:hover { background: #D57A2F; transform: translateY(-1px); }
+  .btn-secondary {
+    color: var(--ink); background: transparent; border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--stone); }
+  .btn-dark { color: var(--paper); background: var(--ink); }
+  .btn-dark:hover { background: var(--soft); }
+
+  /* ====== TOP NAV (STICKY HEADER) ====== */
+  .top-nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: var(--paper);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 5vw;
+  }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .wordmark {
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -1px;
+    color: var(--ink);
+  }
+  .wordmark .five { color: var(--saffron); }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .nav-links a:not(.btn) {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--stone);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:not(.btn):hover { color: var(--ink); }
+  .nav-links .btn { padding: 10px 20px; font-size: 11px; }
+
+  /* ====== SECTION 1 — HERO ====== */
+  .hero {
+    min-height: calc(100vh - 57px);
+    padding: 56px 5vw 40px;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 56px;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-content { display: flex; flex-direction: column; gap: 22px; }
+  .hero-eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--saffron);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .hero-title {
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .hero-tagline {
+    font-size: clamp(15px, 1.3vw, 17px);
+    color: var(--soft);
+    line-height: 1.55;
+    max-width: 480px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 20px;
+    padding: 18px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .stat-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--stone);
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+  .hero-ctas {
+    display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+  }
+  .hero-note {
+    font-size: clamp(20px, 2.2vw, 28px);
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-top: 28px;
+    font-style: normal;
+  }
+
+  .hero-cover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  .cover-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 2820 / 4500;
+    transform: rotate(-2deg);
+    transition: transform 0.4s ease;
+  }
+  .cover-wrap:hover { transform: rotate(-1deg) translateY(-4px); }
+  .cover-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    box-shadow: 0 30px 60px rgba(31,63,72,0.18), 0 12px 24px rgba(31,63,72,0.12);
+  }
+
+  /* ====== SECTION 2 — CRED BAR ====== */
+  .cred-bar {
+    padding: 40px 5vw;
+    max-width: 1280px;
+    margin: 0 auto;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .cred-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    text-align: center;
+  }
+  .cred-cell {
+    display: flex; flex-direction: column; gap: 6px; padding: 0 12px;
+  }
+  .cred-cell:not(:last-child) { border-right: 1px solid var(--border); }
+  .cred-num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: clamp(22px, 2.4vw, 30px);
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .cred-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--stone);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  /* ====== SECTION 3 — PROBLEM ====== */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .problem-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .problem-list li {
+    display: flex; gap: 14px; align-items: flex-start;
+    font-size: 15px; color: var(--soft); line-height: 1.55;
+  }
+  .problem-list li::before {
+    content: "✕";
+    color: var(--saffron);
+    font-weight: 600;
+    flex-shrink: 0;
+    font-size: 14px;
+    margin-top: 2px;
+  }
+  .solution-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px 32px;
+  }
+  .solution-card .heading {
+    font-size: 22px; margin-bottom: 12px;
+  }
+  .solution-card .sub {
+    font-size: 14px; line-height: 1.65; color: var(--soft); margin-bottom: 20px;
+  }
+  .solution-tagline {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--celadon);
+    text-transform: uppercase;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ====== SECTION 4 — THE 8 DRIVERS (COMPRESSED GRID) ====== */
+  .drivers-section { text-align: left; }
+  .drivers-section .heading { max-width: 720px; margin-bottom: 20px; }
+  .drivers-section .subhead {
+    margin-bottom: 40px;
+  }
+  .driver-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .driver-cell {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px 16px;
+    text-align: left;
+    transition: all 0.2s;
+  }
+  .driver-cell:hover {
+    border-color: var(--celadon);
+    transform: translateY(-1px);
+  }
+  .d-num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    color: var(--saffron);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+  .d-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 6px;
+  }
+  .d-desc {
+    font-size: 12px;
+    color: var(--stone);
+    margin-top: 4px;
+    line-height: 1.45;
+  }
+  .diagnosis-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 56px;
+  }
+  .follicle-diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    max-width: 320px;
+    margin: 0 auto 32px;
+  }
+  .follicle-diagram img {
+    width: 100%;
+    height: auto;
+    max-height: 380px;
+    background: transparent;
+    mix-blend-mode: multiply;
+  }
+  .follicle-caption {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--stone);
+    text-transform: uppercase;
+    margin-top: 14px;
+    text-align: center;
+  }
+  .cycle-eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--celadon);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .cycle-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .cycle-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    width: 100%;
+  }
+  .cycle-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cycle-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--saffron);
+    border-radius: 10px 10px 0 0;
+  }
+  .cycle-phase-num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--celadon);
+    text-transform: uppercase;
+  }
+  .cycle-phase-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 8px;
+    margin-bottom: 4px;
+  }
+  .cycle-duration {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--stone);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .cycle-desc {
+    font-size: 13px;
+    color: var(--soft);
+    line-height: 1.55;
+  }
+  .cycle-closing {
+    font-size: 13px;
+    color: var(--stone);
+    font-style: italic;
+    text-align: center;
+    margin-top: 24px;
+    line-height: 1.55;
+  }
+  .driver-bridge {
+    text-align: center;
+  }
+  .driver-bridge-eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--saffron);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 56px;
+    margin-bottom: 14px;
+  }
+  .driver-bridge-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .driver-bridge-sub {
+    font-size: 14px;
+    color: var(--soft);
+    line-height: 1.6;
+    max-width: 540px;
+    margin: 8px auto 40px;
+  }
+
+  /* ====== SECTION 5 — THE RE5 FRAMEWORK (COMPRESSED CARDS) ====== */
+  .framework-section {
+    text-align: left;
+  }
+  .framework-section .heading {
+    margin-bottom: 24px;
+    max-width: 760px;
+  }
+  .phase-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .phase-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 22px;
+    text-align: left;
+    position: relative;
+    transition: all 0.2s;
+    border-top: 3px solid var(--saffron);
+  }
+  .phase-card:hover {
+    border-color: var(--celadon);
+    transform: translateY(-2px);
+  }
+  .phase-num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    color: var(--celadon);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+  }
+  .phase-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 6px;
+    margin-bottom: 8px;
+  }
+  .phase-job {
+    font-size: 12px;
+    color: var(--stone);
+    line-height: 1.5;
+  }
+  .phase-card.last {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+    border-top-color: var(--celadon);
+  }
+  .phase-card.last .phase-num { color: var(--saffron); }
+  .phase-card.last .phase-name { color: var(--paper); }
+  .phase-card.last .phase-job { color: rgba(250,250,247,0.65); }
+  .framework-framing {
+    font-size: 15px;
+    color: var(--soft);
+    line-height: 1.65;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* ====== SECTION 6 — EAST WEST (FULL TWO-COLUMN) ====== */
+  .ew-section { text-align: left; }
+  .ew-heading {
+    font-size: clamp(31px, 4.4vw, 46px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .ew-section .subhead { margin-bottom: 36px; }
+  /* ew-landscape replaced by photo-placeholder */
+  .ew-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  .ew-side {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px 28px;
+    text-align: left;
+  }
+  .ew-side-tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .ew-east .ew-side-tag { color: var(--celadon); }
+  .ew-west .ew-side-tag { color: var(--saffron); }
+  .ew-side-title {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .ew-side-desc {
+    font-size: 14px;
+    color: var(--soft);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .ew-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .ew-card {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .ew-card-script {
+    font-family: "Ma Shan Zheng", serif;
+    font-size: 18px;
+    color: var(--celadon);
+    min-width: 56px;
+    flex-shrink: 0;
+  }
+  .ew-card-script.kr { font-family: sans-serif; font-weight: 400; }
+  .ew-card-script.sk { font-family: sans-serif; font-size: 15px; }
+  .ew-card-content { display: flex; flex-direction: column; gap: 2px; }
+  .ew-card-name {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--stone);
+    text-transform: uppercase;
+  }
+  .ew-card-desc {
+    font-size: 13px;
+    color: var(--soft);
+    line-height: 1.5;
+  }
+  .tool-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .tool-card {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+  }
+  .tool-num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    color: var(--saffron);
+    font-weight: 500;
+    min-width: 24px;
+    flex-shrink: 0;
+  }
+  .tool-card-content { display: flex; flex-direction: column; gap: 2px; }
+  .tool-card-name {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .tool-card-desc {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--stone);
+    text-transform: uppercase;
+  }
+  .ew-principle {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 12px;
+    padding: 48px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ew-principle-eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--saffron);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .ew-principle-quote {
+    font-size: clamp(22px, 2.8vw, 32px);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    position: relative;
+    z-index: 1;
+  }
+  .ew-principle-quote .hl { color: var(--saffron); }
+  .ew-principle-attr {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--stone);
+    margin-top: 20px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+  .ew-seal-bg {
+    position: absolute;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100px;
+    height: 100px;
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ====== 育 CULTURAL ANCHOR ====== */
+  .seal-anchor {
+    display: grid;
+    grid-template-columns: 30fr 70fr;
+    gap: 40px;
+    align-items: start;
+    margin-top: 40px;
+    padding: 48px 56px;
+    background: rgba(232,137,61,0.04);
+    border: none;
+    border-left: 3px solid var(--saffron);
+    border-radius: 0 10px 10px 0;
+  }
+  .seal-anchor-chars {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .seal-anchor-char-main {
+    font-family: "Ma Shan Zheng", serif;
+    font-size: 96px;
+    color: var(--saffron);
+    line-height: 1;
+  }
+  .seal-anchor-char-sub {
+    font-family: "Ma Shan Zheng", serif;
+    font-size: 48px;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .seal-anchor-pinyin {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--stone);
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+  .seal-anchor-body {}
+  .seal-anchor-eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--saffron);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .seal-anchor-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 20px;
+  }
+  .seal-anchor-text {
+    font-size: 1rem;
+    color: var(--soft);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .seal-anchor-text:last-child { margin-bottom: 0; }
+
+  /* ====== SECTION 7 — MID-PAGE CTA ====== */
+  .mid-cta {
+    background: var(--ink);
+    border-radius: 14px;
+    padding: 56px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .mid-cta .eyebrow { color: var(--saffron); margin-bottom: 16px; }
+  .mid-cta .heading {
+    color: var(--paper);
+    font-size: clamp(26px, 3.5vw, 38px);
+    margin-bottom: 14px;
+  }
+  .mid-cta-sub {
+    color: var(--stone);
+    font-size: 15px;
+    max-width: 520px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+  }
+
+  /* ====== SECTION 8 — 3 STEPS ====== */
+  .steps-section { text-align: left; }
+  .steps-section .heading { margin-bottom: 20px; }
+  .steps-section .subhead { margin-bottom: 40px; }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .step-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px 28px;
+    text-align: left;
+    position: relative;
+  }
+  .step-num-large {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 56px;
+    font-weight: 400;
+    color: var(--saffron);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .step-tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--celadon);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .step-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+  .step-desc {
+    font-size: 14px;
+    color: var(--soft);
+    line-height: 1.6;
+  }
+
+  /* ====== SECTION 9 — WHAT EXECUTION LOOKS LIKE ====== */
+  .execution-section { text-align: left; }
+  .execution-section .heading { margin-bottom: 20px; }
+  .execution-section .subhead { margin-bottom: 48px; }
+  .cadence-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .cadence-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 26px;
+    text-align: left;
+  }
+  .cadence-tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--celadon);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .cadence-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+  .cadence-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cadence-list li {
+    font-size: 13px;
+    color: var(--soft);
+    line-height: 1.5;
+    padding-left: 16px;
+    position: relative;
+  }
+  .cadence-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--saffron);
+    font-weight: 600;
+  }
+
+  /* ====== SECTION 10 — WHAT YOU'LL WALK AWAY WITH ====== */
+  .outcomes-section { text-align: left; }
+  .outcomes-section .heading { margin-bottom: 20px; }
+  .outcomes-section .subhead { margin-bottom: 36px; }
+  .outcome-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 56px;
+  }
+  .outcome-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px 28px;
+    text-align: left;
+  }
+  .outcome-eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--saffron);
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .outcome-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+  .outcome-desc {
+    font-size: 14px;
+    color: var(--soft);
+    line-height: 1.6;
+  }
+  .deliverables-divider {
+    height: 1px;
+    background: var(--border);
+    opacity: 0.6;
+    margin-bottom: 48px;
+  }
+  .deliverables-eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--stone);
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    text-align: left;
+  }
+  .deliverable-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .deliverable-row {
+    display: flex;
+    gap: 20px;
+    align-items: baseline;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .deliverable-row:last-child { border-bottom: none; }
+  .deliverable-num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    color: var(--saffron);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+    min-width: 22px;
+  }
+  .deliverable-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    flex-shrink: 0;
+    min-width: 220px;
+  }
+  .deliverable-desc {
+    font-size: 13px;
+    color: var(--soft);
+    line-height: 1.55;
+  }
+
+  /* ====== SECTION 11 — INSIDE THE BOOK ====== */
+  .inside-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .inside-content { display: flex; flex-direction: column; gap: 16px; }
+  .inside-features {
+    display: flex; flex-direction: column; gap: 14px;
+    margin: 8px 0;
+  }
+  .feat {
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .feat-num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    color: var(--saffron);
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 2px;
+    min-width: 22px;
+  }
+  .feat-text {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .feat-text strong { font-weight: 600; }
+  .inside-cover-frame {
+    aspect-ratio: 2820 / 4500;
+    background: var(--ink);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(31,63,72,0.15);
+    max-width: 360px;
+    justify-self: center;
+  }
+  .inside-cover-frame img { width: 100%; height: 100%; object-fit: cover; }
+  .mc-bar {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    margin-top: 56px;
+    flex-wrap: wrap;
+  }
+  .mc-bar-content { flex: 1; min-width: 280px; }
+  .mc-bar-tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--celadon);
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .mc-bar-title {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .mc-bar-desc {
+    font-size: 13px;
+    color: var(--soft);
+    line-height: 1.55;
+  }
+
+  /* ====== SECTION 12 — SOLOMON'S COMMITMENT ====== */
+  .commitment-section {
+    padding: clamp(48px, 6vw, 80px) 5vw;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .commitment-card {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 16px;
+    padding: clamp(56px, 7vw, 88px) clamp(32px, 5vw, 80px);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .commitment-eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--saffron);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+  .commitment-body {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--paper);
+    font-weight: 500;
+  }
+  .commitment-body p {
+    margin-bottom: 24px;
+  }
+  .commitment-body p:last-child {
+    margin-bottom: 0;
+  }
+  .commitment-body .hl {
+    color: var(--saffron);
+  }
+  .commitment-sig {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(250,250,247,0.15);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--stone);
+    text-transform: uppercase;
+  }
+  .commitment-seal {
+    position: absolute;
+    bottom: 24px;
+    right: 32px;
+    width: 64px;
+    height: 64px;
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ====== SECTION 13 — SOLOMON ====== */
+  .solomon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .solomon-grid .photo-placeholder.portrait {
+    max-width: none;
+    width: 100%;
+  }
+  .solomon-quote {
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.55;
+    font-style: italic;
+    margin: 16px 0;
+    padding-left: 20px;
+    border-left: 2px solid var(--saffron);
+  }
+  .solomon-bio {
+    font-size: 14px;
+    color: var(--soft);
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+
+  /* ====== SECTION 14 — FAQ ====== */
+  .faq-section { text-align: left; }
+  .faq-section .heading { margin-bottom: 20px; }
+  .faq-section .subhead { margin-bottom: 36px; }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .faq-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 26px 28px;
+  }
+  .faq-q {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .faq-a {
+    font-size: 13px;
+    color: var(--soft);
+    line-height: 1.65;
+  }
+
+  /* ====== SECTION 15 — FINAL CTA + FOOTER ====== */
+  .final-section {
+    background: var(--ink);
+    border-radius: 16px;
+    padding: 72px 48px;
+    margin: 0 auto 64px;
+    max-width: 1200px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .final-lockup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .final-lockup-wordmark {
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: -1px;
+    color: var(--paper);
+  }
+  .final-lockup-wordmark .five { color: var(--saffron); }
+  .final-lockup-monogram {
+    height: 28px;
+    width: auto;
+    display: block;
+  }
+  .final-section .eyebrow {
+    color: var(--saffron);
+    font-size: 16px;
+    letter-spacing: 0.22em;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+  .final-section .heading {
+    color: var(--paper);
+    font-size: clamp(32px, 4.5vw, 48px);
+    margin-bottom: 16px;
+  }
+  .final-sub {
+    color: var(--stone);
+    font-size: 15px;
+    max-width: 560px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+  }
+  .final-row {
+    display: flex; gap: 12px;
+    justify-content: center; align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .email-input {
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 14px;
+    padding: 14px 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.06);
+    color: var(--paper);
+    width: 280px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .email-input::placeholder { color: var(--stone); }
+  .email-input:focus { border-color: var(--saffron); }
+  .final-divider {
+    margin: 28px 0;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+  }
+  .final-divider::before,
+  .final-divider::after {
+    content: "";
+    flex: 0 0 60px;
+    height: 1px;
+    background: rgba(255,255,255,0.15);
+  }
+  .final-divider span {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--stone);
+    text-transform: uppercase;
+  }
+  .final-trust {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--stone);
+    text-transform: uppercase;
+    margin-top: 16px;
+  }
+  .final-seal {
+    position: absolute;
+    bottom: 24px;
+    right: 32px;
+    width: 56px;
+    height: 56px;
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  footer {
+    padding: 40px 48px;
+    max-width: 1280px;
+    margin: 0 auto;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .footer-wordmark {
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+  }
+  .footer-wordmark .five { color: var(--saffron); }
+  .footer-tagline {
+    font-style: italic; font-size: 13px; color: var(--stone); margin-left: 16px;
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px; letter-spacing: 0.1em;
+    color: var(--stone); text-decoration: none; text-transform: uppercase;
+  }
+  .footer-links a:hover { color: var(--ink); }
+  .footer-copy {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px; letter-spacing: 0.15em; color: var(--stone);
+    width: 100%; text-align: center;
+    margin-top: 16px; padding-top: 16px;
+    border-top: 1px solid var(--border);
+    text-transform: uppercase;
+  }
+
+  /* ====== PHOTO PLACEHOLDERS ====== */
+  .photo-placeholder {
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: linear-gradient(135deg, var(--paper) 0%, #F0EDE6 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .photo-placeholder-tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--saffron);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .photo-placeholder-desc {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--stone);
+    text-transform: uppercase;
+    line-height: 1.7;
+    max-width: 700px;
+    text-align: center;
+  }
+  .photo-placeholder.landscape { aspect-ratio: 21/9; }
+  .photo-placeholder.portrait { aspect-ratio: 4/5; max-width: 400px; }
+  .photo-placeholder.detail { aspect-ratio: 4/3; }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 900px) {
+    .cycle-grid { grid-template-columns: repeat(2, 1fr); }
+    .seal-anchor { grid-template-columns: 1fr; gap: 24px; padding: 32px 28px; }
+    .seal-anchor-chars { flex-direction: row; gap: 16px; align-items: baseline; }
+    .driver-grid { grid-template-columns: repeat(2, 1fr); }
+    .phase-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .phase-card { padding: 22px 16px; }
+    .ew-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .cadence-grid { grid-template-columns: 1fr; }
+    .outcome-grid { grid-template-columns: 1fr; }
+    .faq-grid { grid-template-columns: 1fr; }
+    .cred-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
+    .cred-cell:nth-child(2) { border-right: none; }
+  }
+  @media (max-width: 640px) {
+    .hero { grid-template-columns: 1fr; gap: 32px; padding: 40px 5vw; }
+    .hero-cover { order: 2; }
+    .hero-content { order: 1; }
+    .cover-wrap { max-width: 220px; }
+    .hero-stats { gap: 18px; flex-wrap: wrap; }
+    .problem-grid { grid-template-columns: 1fr; gap: 40px; }
+    .inside-grid { grid-template-columns: 1fr; gap: 40px; }
+    .inside-cover-frame { max-width: 240px; }
+    .solomon-grid { grid-template-columns: 1fr; gap: 40px; }
+    .solomon-grid .photo-placeholder.portrait { max-width: 320px; margin: 0 auto; }
+    .phase-grid { grid-template-columns: repeat(2, 1fr); }
+    .cred-grid { grid-template-columns: 1fr; gap: 24px; }
+    .cred-cell { border-right: none !important; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    .cred-cell:last-child { border-bottom: none; padding-bottom: 0; }
+    .deliverable-row { flex-direction: column; gap: 6px; }
+    .deliverable-title { min-width: 0; }
+    .final-section { padding: 56px 24px; border-radius: 12px; }
+    .email-input { width: 100%; }
+    .final-row { flex-direction: column; }
+    .final-row .btn { width: 100%; }
+    footer { flex-direction: column; text-align: center; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV (STICKY HEADER) -->
+<nav class="top-nav">
+  <div class="nav-left">
+    <div class="wordmark">RE<span class="five">5</span></div>
+  </div>
+  <div class="nav-links">
+    <a href="#system">System</a>
+    <a href="#cta">Book</a>
+    <a href="#">Masterclass</a>
+    <a href="#cta" class="btn btn-primary">Get the Book — $1</a>
+  </div>
+</nav>
+
+<!-- ========== SECTION 1 — HERO ========== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">THE 30/70 PROTOCOL · MEN'S EDITION</div>
+    <h1 class="hero-title">Stop guessing.<br>Start growing your <span class="hl-saffron">hair back</span>.</h1>
+    <p class="hero-tagline">The RE5 starter protocol that addresses all <strong>8 biological drivers</strong> of hair loss — science-based, natural-first, for the price of a coffee.</p>
+
+    <div class="hero-stats">
+      <div><div class="stat-num">8</div><div class="stat-label">Drivers</div></div>
+      <div><div class="stat-num">40</div><div class="stat-label">Tools Mapped</div></div>
+      <div><div class="stat-num">$1</div><div class="stat-label">Whole Book</div></div>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="#cta" class="btn btn-primary">Get the Book — $1 →</a>
+      <a href="#system" class="btn btn-secondary">See the RE5 System</a>
+    </div>
+    <div class="hero-note">Less noise. More follicles.</div>
+  </div>
+
+  <div class="hero-cover">
+    <div class="cover-wrap">
+      <img src="assets/book3.jpg" alt="RE5 The Natural Hair Regrowth System — Men's Edition">
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO PLACEHOLDER 1 — Hero desk shot -->
+<div style="padding:0 5vw;max-width:1280px;margin:0 auto;">
+  <div class="photo-placeholder landscape">
+    <div class="photo-placeholder-tag">Photo to Add · 21:9 Landscape</div>
+    <div class="photo-placeholder-desc">Solomon's working desk in Bangkok. Open notebook with handwritten driver diagrams, microscope on left, ceramic bowl of dried Eastern herbs (Nu Zhen Zi, white peony), small amber dropper bottles of peptide serum, derma roller resting on parchment. Warm afternoon light from a window. Shot on lab-paper coloured surface. Overhead 3/4 angle. 1600×686px.</div>
+  </div>
+</div>
+
+<!-- ========== SECTION 2 — CREDIBILITY STRIP ========== -->
+<div class="cred-bar">
+  <div class="cred-grid">
+    <div class="cred-cell">
+      <div class="cred-num">5,000+</div>
+      <div class="cred-label">Hours of Research</div>
+    </div>
+    <div class="cred-cell">
+      <div class="cred-num">8</div>
+      <div class="cred-label">Biological Drivers</div>
+    </div>
+    <div class="cred-cell">
+      <div class="cred-num">40</div>
+      <div class="cred-label">Tools Mapped & Scored</div>
+    </div>
+    <div class="cred-cell">
+      <div class="cred-num">5 YRS</div>
+      <div class="cred-label">To Build · 30 Min To Read</div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== SECTION 3 — PROBLEM ========== -->
+<section class="section">
+  <div class="problem-grid">
+    <div>
+      <div class="eyebrow">The Problem</div>
+      <h2 class="heading">Why nothing has worked.</h2>
+      <p class="subhead" style="margin-bottom:24px;">The hair loss industry sold you a surface problem. It's a systems problem.</p>
+      <ul class="problem-list">
+        <li>Single-product thinking — one shampoo, one supplement, one hope</li>
+        <li>DHT-only framing that ignores the seven other drivers</li>
+        <li>Cosmetic thickening marketed as regrowth</li>
+        <li>East or West — never both, never integrated</li>
+        <li>No honest ceilings — every product claims to be "the solution"</li>
+      </ul>
+    </div>
+
+    <div class="solution-card">
+      <div class="eyebrow celadon">The RE5 Approach</div>
+      <h3 class="heading">System over product.</h3>
+      <p class="sub">Hair loss isn't one problem. It's eight, interacting at the follicle. <strong>The Natural Hair Regrowth System — 30/70 Protocol</strong> covers the 30% of work that drives 70% of results — across all of them.</p>
+      <div class="solution-tagline">8 Drivers · 5 Phases · One System</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 4 — THE 8 DRIVERS (COMPRESSED GRID) ========== -->
+<section id="system" class="section drivers-section">
+  <div class="eyebrow">The Diagnosis</div>
+  <h2 class="heading">Hair loss isn't one problem.<br>It's <span class="hl-saffron">eight</span>.</h2>
+  <p class="subhead">Every case is a <strong>different overlap</strong> of the eight. The RE5 protocol matches the overlap.</p>
+
+  <div class="diagnosis-visual">
+    <div class="follicle-diagram">
+      <img src="assets/follicle.svg" alt="The hair follicle — where all 8 drivers converge">
+      <div class="follicle-caption">The follicle — where all 8 drivers converge</div>
+    </div>
+
+    <div class="cycle-eyebrow">Follicle Life Cycle</div>
+    <div class="cycle-title">Four phases. Eight drivers. Every case.</div>
+
+    <div class="cycle-grid">
+      <div class="cycle-card">
+        <div class="cycle-phase-num">Phase 01</div>
+        <div class="cycle-phase-name">Anagen</div>
+        <div class="cycle-duration">2–7 Years</div>
+        <div class="cycle-desc">Active growth phase. The follicle produces hair fiber from the dermal papilla.</div>
+      </div>
+      <div class="cycle-card">
+        <div class="cycle-phase-num">Phase 02</div>
+        <div class="cycle-phase-name">Catagen</div>
+        <div class="cycle-duration">2–3 Weeks</div>
+        <div class="cycle-desc">Transition. The follicle disconnects from blood supply and prepares to rest.</div>
+      </div>
+      <div class="cycle-card">
+        <div class="cycle-phase-num">Phase 03</div>
+        <div class="cycle-phase-name">Telogen</div>
+        <div class="cycle-duration">~3 Months</div>
+        <div class="cycle-desc">Resting phase. Hair sits dormant in the scalp before shedding.</div>
+      </div>
+      <div class="cycle-card">
+        <div class="cycle-phase-num">Phase 04</div>
+        <div class="cycle-phase-name">Exogen</div>
+        <div class="cycle-duration">Days</div>
+        <div class="cycle-desc">Shedding. The old hair releases. A new anagen cycle begins underneath.</div>
+      </div>
+    </div>
+
+    <div class="cycle-closing">Hair loss isn't lost hair. It's interrupted cycles. RE5 protocols target the interruption.</div>
+  </div>
+
+  <div class="driver-bridge">
+    <div class="driver-bridge-eyebrow">What Interrupts the Cycle</div>
+    <div class="driver-bridge-title">Eight biological drivers.</div>
+    <p class="driver-bridge-sub">Some are dominant in your case. Some aren't. The protocol matches the overlap.</p>
+  </div>
+
+  <div class="driver-grid">
+    <div class="driver-cell"><div class="d-num">D1</div><div class="d-name">Hormonal</div><div class="d-desc">DHT sensitivity at the follicle</div></div>
+    <div class="driver-cell"><div class="d-num">D2</div><div class="d-name">Inflammatory</div><div class="d-desc">Chronic scalp inflammation</div></div>
+    <div class="driver-cell"><div class="d-num">D3</div><div class="d-name">Oxidative</div><div class="d-desc">Mitochondrial stress, free radicals</div></div>
+    <div class="driver-cell"><div class="d-num">D4</div><div class="d-name">Vascular</div><div class="d-desc">Blood flow to scalp</div></div>
+    <div class="driver-cell"><div class="d-num">D5</div><div class="d-name">Nutritional</div><div class="d-desc">Substrate the follicle needs</div></div>
+    <div class="driver-cell"><div class="d-num">D6</div><div class="d-name">Fibrosis</div><div class="d-desc">Structural scarring, scalp tension</div></div>
+    <div class="driver-cell"><div class="d-num">D7</div><div class="d-name">Growth Signal</div><div class="d-desc">Wnt and BMP pathways</div></div>
+    <div class="driver-cell"><div class="d-num">D8</div><div class="d-name">Scalp</div><div class="d-desc">The microenvironment itself</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 5 — THE RE5 FRAMEWORK (COMPRESSED CARDS) ========== -->
+<section class="section framework-section">
+  <div class="eyebrow celadon">The Framework</div>
+  <h2 class="heading">RE5 — five phases.<br>Run <span class="hl-celadon">concurrently</span>, not in sequence.</h2>
+
+  <div class="phase-grid">
+    <div class="phase-card">
+      <div class="phase-num">R1</div>
+      <div class="phase-name">Reset</div>
+      <div class="phase-job">Clear the terrain</div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-num">R2</div>
+      <div class="phase-name">Reduce</div>
+      <div class="phase-job">Stop the damage</div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-num">R3</div>
+      <div class="phase-name">Restore</div>
+      <div class="phase-job">Rebuild environment</div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-num">R4</div>
+      <div class="phase-name">Regenerate</div>
+      <div class="phase-job">Push growth signal</div>
+    </div>
+    <div class="phase-card last">
+      <div class="phase-num">R5</div>
+      <div class="phase-name">Retain</div>
+      <div class="phase-job">Sustain long-term</div>
+    </div>
+  </div>
+
+  <p class="framework-framing">The RE5 framework runs on five phases — concurrently. The 30/70 activates all five at the <strong>simplest possible level</strong>. The framework is the constant; the tools evolve within it.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 6 — EAST WEST (FULL TWO-COLUMN) ========== -->
+<section class="section ew-section">
+  <div class="eyebrow">The Differentiator</div>
+  <h2 class="ew-heading">The <span class="hl-celadon">East</span> prepares the ground.<br>The <span class="hl-saffron">West</span> activates the growth.</h2>
+  <p class="subhead">Most protocols choose a side. RE5 runs <strong>both</strong> — because the biology doesn't care which tradition observed it first.</p>
+
+  <div class="photo-placeholder landscape" style="margin-bottom:40px;">
+    <div class="photo-placeholder-tag">Photo to Add · 21:9 Landscape</div>
+    <div class="photo-placeholder-desc">Two-zone composition. LEFT zone: Eastern botanicals — dried roots in ceramic bowls, traditional medicine paper packaging, dried herbs in glass apothecary jars. RIGHT zone: Western tools — derma roller, LLLT laser cap, peptide serum dropper bottles. Both zones unified by warm natural overhead light, lab-paper background. Reads as 'East meets West' without literal division. 1600×686px.</div>
+  </div>
+
+  <div class="ew-grid">
+    <div class="ew-side ew-east">
+      <div class="ew-side-tag">Eastern Botanical Intelligence</div>
+      <div class="ew-side-title">Three traditions. One principle.</div>
+      <div class="ew-side-desc">Internal balance precedes external intervention. Each tradition mapped a different facet of the same biology — the gut-scalp axis, hormonal modulation through botanicals, and stress-driven follicular suppression.</div>
+      <div class="ew-cards">
+        <div class="ew-card">
+          <span class="ew-card-script">中医</span>
+          <div class="ew-card-content">
+            <span class="ew-card-name">Traditional Chinese Medicine</span>
+            <span class="ew-card-desc">Blood nourishment and circulation</span>
+          </div>
+        </div>
+        <div class="ew-card">
+          <span class="ew-card-script kr">한방</span>
+          <div class="ew-card-content">
+            <span class="ew-card-name">Korean Hanbang</span>
+            <span class="ew-card-desc">Scalp microcirculation and vitality</span>
+          </div>
+        </div>
+        <div class="ew-card">
+          <span class="ew-card-script sk">आयुर्वेद</span>
+          <div class="ew-card-content">
+            <span class="ew-card-name">Ayurveda</span>
+            <span class="ew-card-desc">Stress modulation and scalp therapy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ew-side ew-west">
+      <div class="ew-side-tag">Western Natural Precision</div>
+      <div class="ew-side-title">Evidence-based growth tools.</div>
+      <div class="ew-side-desc">Targeted, mechanism-validated interventions that activate specific biological pathways. The 30/70 deploys Western tools where they perform best, with no pharmaceuticals required in the Natural variant.</div>
+      <div class="tool-cards">
+        <div class="tool-card">
+          <span class="tool-num">01</span>
+          <div class="tool-card-content">
+            <span class="tool-card-name">Natural DHT management</span>
+            <span class="tool-card-desc">Driver 1 · Hormonal</span>
+          </div>
+        </div>
+        <div class="tool-card">
+          <span class="tool-num">02</span>
+          <div class="tool-card-content">
+            <span class="tool-card-name">Microneedling</span>
+            <span class="tool-card-desc">Driver 7 · Growth Signal</span>
+          </div>
+        </div>
+        <div class="tool-card">
+          <span class="tool-num">03</span>
+          <div class="tool-card-content">
+            <span class="tool-card-name">Topical peptide actives</span>
+            <span class="tool-card-desc">Driver 6+7 · Structure + Growth</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="seal-anchor">
+    <div class="seal-anchor-chars">
+      <div class="seal-anchor-char-main">育</div>
+      <div class="seal-anchor-char-sub">髮</div>
+      <div class="seal-anchor-pinyin">yù fà</div>
+    </div>
+    <div class="seal-anchor-body">
+      <div class="seal-anchor-eyebrow">The Cultural Anchor</div>
+      <div class="seal-anchor-title">育髮 — to cultivate hair.</div>
+      <p class="seal-anchor-text">In Mandarin, 育 (yù) means to nurture, to cultivate, to raise from seed. 育髮 (yù fà) — to cultivate hair — is the philosophy at the core of Traditional Chinese Medicine: you don't force hair to grow, you cultivate the conditions for growth. Prepare the biological terrain. Then the body does what it's designed to do.</p>
+      <p class="seal-anchor-text">RE5 is built on this principle. The 30/70 isn't an attack protocol. It's a cultivation protocol. The framework runs on biology — it just respects the same logic that two thousand years of TCM observation arrived at first.</p>
+    </div>
+  </div>
+
+  <div class="ew-principle">
+    <img src="assets/seal.svg" alt="育" class="ew-seal-bg">
+    <div class="ew-principle-eyebrow">The RE5 Principle</div>
+    <div class="ew-principle-quote">Heal the environment.<br>Then <span class="hl">activate the growth</span>.</div>
+    <div class="ew-principle-attr">— The East-West Integration in One Sentence</div>
+  </div>
+</section>
+
+<!-- ========== SECTION 7 — MID-PAGE CTA ========== -->
+<section class="section">
+  <div class="mid-cta">
+    <div class="eyebrow">Ready?</div>
+    <h2 class="heading">The whole map. $1.</h2>
+    <p class="mid-cta-sub">Eight drivers. Forty tools. One coffee. Skip the guessing — get the RE5 map I had to build through trial and error.</p>
+    <a href="#cta" class="btn btn-primary">Get the Book — $1 →</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 8 — 3 STEPS ========== -->
+<section class="section steps-section">
+  <div class="eyebrow celadon">The Path</div>
+  <h2 class="heading">3 steps to your protocol.</h2>
+  <p class="subhead">From buying the book to running the protocol — the journey is short.</p>
+
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num-large">01</div>
+      <div class="step-tag">Read</div>
+      <div class="step-title">30 minutes with the framework.</div>
+      <div class="step-desc">Read the book in one sitting. Learn the 8 drivers, the 5 phases, and how they interact. By the end, you'll know which drivers are likely running your case.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-large">02</div>
+      <div class="step-tag">Build</div>
+      <div class="step-title">Map your protocol.</div>
+      <div class="step-desc">Use the Shopping Checklist to source exact products at exact specs. The 30/70 gives you the minimum viable protocol — natural-first, executable, no guesswork.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num-large">03</div>
+      <div class="step-tag">Run</div>
+      <div class="step-title">Execute and track.</div>
+      <div class="step-desc">Run the protocol from the same week. Monthly photos under standard conditions. 6-month minimum, 12-month benchmark — that's the honest timeline for visible change.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 9 — WHAT EXECUTION LOOKS LIKE ========== -->
+<section class="section execution-section">
+  <div class="eyebrow celadon">The Cadence</div>
+  <h2 class="heading">What execution looks like.</h2>
+  <p class="subhead">The RE5 30/70 isn't a single action. It's a rhythm — daily, weekly, and monthly layers that compound.</p>
+
+  <div class="photo-placeholder detail" style="margin-bottom:40px;">
+    <div class="photo-placeholder-tag">Photo to Add · 4:3 Detail</div>
+    <div class="photo-placeholder-desc">Close-up overhead shot of bathroom counter. Small ceramic dish with supplement stack laid out (capsules in three small piles), microneedling derma stamp in case, amber bottle of scalp oil with dropper, glass of water, folded handwritten daily routine note. Warm morning light. Lab-paper colour palette. Reads as 'this is what your morning looks like running the protocol.' 1200×900px.</div>
+  </div>
+
+  <div class="cadence-grid">
+    <div class="cadence-card">
+      <div class="cadence-tag">Daily</div>
+      <div class="cadence-title">The morning and evening stack.</div>
+      <ul class="cadence-list">
+        <li>Topical serum application</li>
+        <li>Scalp oil (evening)</li>
+        <li>Supplement timing — AM and PM split</li>
+        <li>5 minutes total active time</li>
+      </ul>
+    </div>
+    <div class="cadence-card">
+      <div class="cadence-tag">Weekly</div>
+      <div class="cadence-title">The microneedling session.</div>
+      <ul class="cadence-list">
+        <li>Microneedling at protocol depth</li>
+        <li>48-hour recovery window</li>
+        <li>Post-needling serum application</li>
+        <li>Scalp check — redness, flaking, sensitivity</li>
+      </ul>
+    </div>
+    <div class="cadence-card">
+      <div class="cadence-tag">Monthly</div>
+      <div class="cadence-title">Track and adjust.</div>
+      <ul class="cadence-list">
+        <li>Standardised photos — same light, same angle</li>
+        <li>Shedding pattern review</li>
+        <li>Supplement cycle check</li>
+        <li>Adjust based on what the scalp shows you</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 10 — WHAT YOU'LL WALK AWAY WITH ========== -->
+<section class="section outcomes-section">
+  <div class="eyebrow">What You'll Walk Away With</div>
+  <h2 class="heading">Read it once.<br><span>Run it </span><span class="hl-saffron">for life</span>.</h2>
+  <p class="subhead">After reading, you'll be able to:</p>
+
+  <div class="outcome-grid">
+    <div class="outcome-card">
+      <div class="outcome-eyebrow">01 · Diagnose</div>
+      <div class="outcome-title">Identify your top 3 drivers.</div>
+      <div class="outcome-desc">Map your specific case to the eight biological drivers. Stop guessing which intervention to try — know which ones address what's actually running in your scalp.</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-eyebrow">02 · Build</div>
+      <div class="outcome-title">Assemble a working protocol.</div>
+      <div class="outcome-desc">Source the right tools at the right doses for your top drivers. The 30/70 covers all eight at the simplest possible level — buildable from your kitchen in one week.</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-eyebrow">03 · Run</div>
+      <div class="outcome-title">Execute for six months.</div>
+      <div class="outcome-desc">Daily and weekly cadence. What to track, what to expect, what to adjust. The book gives you the runbook — not a one-time read.</div>
+    </div>
+  </div>
+
+  <div class="deliverables-divider"></div>
+  <div class="deliverables-eyebrow">Inside the RE5 30/70 — the executable form of the full system</div>
+
+  <div class="deliverable-list">
+    <div class="deliverable-row">
+      <span class="deliverable-num">01</span>
+      <span class="deliverable-title">The 8 drivers, fully explained</span>
+      <span class="deliverable-desc">Plain-English biology of every driver, with the mechanism that matters and the one that doesn't.</span>
+    </div>
+    <div class="deliverable-row">
+      <span class="deliverable-num">02</span>
+      <span class="deliverable-title">40 tools, scored and ranked</span>
+      <span class="deliverable-desc">Every intervention mapped to its driver, with evidence grade A through F. No filler. No fluff.</span>
+    </div>
+    <div class="deliverable-row">
+      <span class="deliverable-num">03</span>
+      <span class="deliverable-title">The 4-oil scalp blend</span>
+      <span class="deliverable-desc">Exact formulation, ratios, and application protocol. Source list included.</span>
+    </div>
+    <div class="deliverable-row">
+      <span class="deliverable-num">04</span>
+      <span class="deliverable-title">Microneedling done right</span>
+      <span class="deliverable-desc">Depth, frequency, recovery, and what NOT to do. The protocol that respects the wound-healing cascade.</span>
+    </div>
+    <div class="deliverable-row">
+      <span class="deliverable-num">05</span>
+      <span class="deliverable-title">The supplement architecture</span>
+      <span class="deliverable-desc">The natural-variant stack with doses, timing, brand specifications, and what to skip entirely.</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 11 — INSIDE THE BOOK ========== -->
+<section class="section">
+  <div class="inside-grid">
+    <div class="inside-cover-frame">
+      <img src="assets/book3.jpg" alt="The Natural Hair Regrowth System — Men's Edition">
+    </div>
+
+    <div class="inside-content">
+      <div class="eyebrow">The Book</div>
+      <h2 class="heading">The whole map. <span class="hl-saffron">$1.</span></h2>
+      <p class="subhead">11 chapters. 40 tools mapped and scored. Run-it-this-week. Built so you can read it in 30 minutes and execute the same week.</p>
+
+      <div class="inside-features">
+        <div class="feat"><span class="feat-num">01</span><span class="feat-text"><strong>The 8-driver framework</strong> — explained in plain English. Why every case is a different overlap.</span></div>
+        <div class="feat"><span class="feat-num">02</span><span class="feat-text"><strong>The 30/70 Protocol</strong> — minimum viable, natural-first, executable from day one.</span></div>
+        <div class="feat"><span class="feat-num">03</span><span class="feat-text"><strong>Separate serum + oil chapters</strong> — application protocols, microneedling depth (0.5–0.75mm).</span></div>
+        <div class="feat"><span class="feat-num">04</span><span class="feat-text"><strong>Shopping Checklist</strong> — exact products, exact specs, exact brands.</span></div>
+        <div class="feat"><span class="feat-num">05</span><span class="feat-text"><strong>Honest ceilings</strong> — every tool has its limit declared. No hype. No guarantees.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mc-bar">
+    <div class="mc-bar-content">
+      <div class="mc-bar-tag">When You're Ready For More</div>
+      <div class="mc-bar-title">The RE5 Masterclass — the full system on video.</div>
+      <div class="mc-bar-desc">All 6 protocol variants (Natural, Hybrid, Pharma · Men + Women). The complete supplement architecture. Six day-in-the-life walkthroughs. Master tool table with scored alternatives. The same framework — fully expanded.</div>
+    </div>
+    <a href="#" class="btn btn-dark">Explore the Masterclass →</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 12 — SOLOMON'S COMMITMENT ========== -->
+<section class="commitment-section">
+  <div class="commitment-card">
+    <img src="assets/seal.svg" alt="育" class="commitment-seal">
+    <div class="commitment-eyebrow">The Commitment · Signed</div>
+    <div class="commitment-body">
+      <p>I'm not selling you regrowth. I'm selling you the <span class="hl">framework</span> that made mine possible.</p>
+      <p>No fake before-and-afters. No 30-day promises. No hidden upsells.</p>
+      <p>Read the book. If the framework doesn't deliver on what's promised here, refund the dollar — no questions, no email survey, no exit pop-up. The protocol either earns your trust, or it doesn't.</p>
+    </div>
+    <div class="commitment-sig">— Solomon · Founder, RE5</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 13 — SOLOMON ========== -->
+<section class="section">
+  <div class="solomon-grid">
+    <div class="photo-placeholder portrait">
+      <div class="photo-placeholder-tag">Photo to Add · 4:5 Portrait</div>
+      <div class="photo-placeholder-desc">Editorial portrait of Solomon. 3/4 angle. Quiet, considered, not smiling. Looking slightly off-camera. Solid-color shirt (navy, charcoal, or dark teal). Out-of-focus warm neutral background. Single soft window light from left, gentle shadow on right. Hardcover book author photo register, not corporate or social. 1200×1500px.</div>
+    </div>
+
+    <div>
+      <div class="eyebrow">The Author</div>
+      <h2 class="heading">Built by someone<br>who went through it.</h2>
+      <p class="solomon-bio">Half Chinese, half Korean. Former nightclub owner — which means I lived through every driver in the RE5 framework before I knew what they were.</p>
+      <div class="solomon-quote">"I'm not a dermatologist. I have a map. This book hands you the map I had to build through trial and error."</div>
+      <p class="solomon-bio">Two years of focused research. Five years of self-testing with monthly standardised photographs. Two medical traditions running in the family. The result is RE5 — and the 30/70 is the entry point.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== SECTION 14 — FAQ ========== -->
+<section class="section faq-section">
+  <div class="eyebrow">Common Questions</div>
+  <h2 class="heading">Before you read.</h2>
+  <p class="subhead">Four questions buyers ask before they commit. Honest answers.</p>
+
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-q">Will this work for me?</div>
+      <div class="faq-a">If your loss is early-to-mid stage and being driven by drivers most products ignore — measurably, yes. If it's advanced-stage genetic loss, the book is foundation work, not a cure. The framework helps you figure out which case you're in.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is this a $1 trick to sell me a $200 course?</div>
+      <div class="faq-a">The Masterclass exists. It's not $200, and the book stands alone as a complete starter protocol. You don't need to buy anything else to run it. The Masterclass is the next step if you want it — not a hidden second purchase.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">I'm already on minoxidil or finasteride. Useful?</div>
+      <div class="faq-a">Yes — possibly more than starting from zero. Pharma addresses the hormonal driver. The 30/70 explains what's underneath, and what to add to keep the pharma stack working past the 12–18 month plateau.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Why no before-and-after photos?</div>
+      <div class="faq-a">Because most before-and-afters in this industry are misleading. RE5 is built on biological mechanism, not photographic proof. Run it 6 months, take your own photos under standard conditions. That's the only proof that means anything.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 15 — FINAL CTA + FOOTER ========== -->
+<div style="padding:0 5vw;">
+  <div id="cta" class="final-section">
+    <img src="assets/seal.svg" alt="育" class="final-seal">
+
+    <div class="final-lockup">
+      <div class="final-lockup-wordmark">RE<span class="five">5</span></div>
+      <img src="assets/horizontal%20monogram%20dark.svg" alt="RE5" class="final-lockup-monogram">
+    </div>
+
+    <div class="eyebrow">The Offer</div>
+    <h2 class="heading">Less noise. More follicles.</h2>
+    <p class="final-sub">The Natural Hair Regrowth System — Men's Edition. Get the whole map for $1, or get the free 8 Drivers Checklist if you're not ready.</p>
+
+    <div class="final-row">
+      <a href="#" class="btn btn-primary">Get the Book — $1 →</a>
+    </div>
+
+    <div class="final-divider"><span>or</span></div>
+
+    <div class="final-row">
+      <input type="email" class="email-input" placeholder="your@email.com">
+      <a href="#" class="btn btn-secondary" style="color:var(--paper);border-color:rgba(255,255,255,0.25);">Free Checklist →</a>
+    </div>
+
+    <div class="final-trust">Stripe Secured · Instant Download · Satisfaction Guaranteed</div>
+  </div>
+</div>
+
+<footer>
+  <div style="display:flex;align-items:center;flex-wrap:wrap;">
+    <div class="footer-wordmark">RE<span class="five">5</span></div>
+    <div class="footer-tagline">Less noise. More follicles.</div>
+  </div>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
+    <a href="#">Masterclass</a>
+  </div>
+  <div class="footer-copy">Published by Bald Research · © 2026 · Vol 03 · The Natural Hair Regrowth System, Men's Edition</div>
+</footer>
+
+</body>
+</html>
