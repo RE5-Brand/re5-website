@@ -1,0 +1,504 @@
+:root {
+  --paper: #FAFAF7;
+  --ink: #1A1A1A;
+  --saffron: #E8893D;
+  --celadon: #2F5F6B;
+  --stone: #8A8578;
+  --soft: #5C5852;
+  --border: #E0DDD5;
+  --celadon-light: #5A8B95;
+  --teal-deep: #1F4555;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  font-family: "Nunito Sans", sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ====== TOP NAV ====== */
+.top-nav {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: var(--paper);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 5vw;
+}
+.wordmark {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -1px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.wordmark .five { color: var(--saffron); }
+
+/* ====== SHARED TYPOGRAPHY ====== */
+.eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--saffron);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.mono {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+/* ====== SHARED BUTTON ====== */
+.btn {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  padding: 14px 28px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+.btn-primary { color: var(--paper); background: var(--saffron); }
+.btn-primary:hover { background: #D57A2F; transform: translateY(-1px); }
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-secondary {
+  color: var(--ink); background: transparent; border: 1px solid var(--border);
+}
+.btn-secondary:hover { border-color: var(--stone); }
+
+/* ====== ASSESSMENT LAYOUT ====== */
+.assessment-shell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 5vw;
+}
+
+/* ====== LANDING PAGE ====== */
+.landing {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 6vw, 80px) 0;
+}
+.landing-title {
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.landing-sub {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--soft);
+  max-width: 560px;
+  margin-bottom: 36px;
+}
+.landing-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.landing-features li {
+  font-size: 14px;
+  color: var(--soft);
+  line-height: 1.5;
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+.landing-features li::before {
+  content: "•";
+  color: var(--saffron);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.landing-tagline {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--stone);
+  margin-top: 32px;
+}
+
+/* ====== PROGRESS BAR ====== */
+.progress-header {
+  padding: 24px 0 0;
+}
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.progress-part {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--stone);
+  text-transform: uppercase;
+}
+.progress-count {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--stone);
+}
+.progress-track {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--saffron);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* ====== QUESTION SCREEN ====== */
+.question-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(32px, 4vw, 56px) 0;
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.question-text {
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: 32px;
+}
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  padding: 16px 20px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 15px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.15s;
+  line-height: 1.45;
+}
+.option-btn:hover {
+  border-color: var(--celadon);
+  transform: translateY(-1px);
+}
+.option-btn.selected {
+  border-color: var(--saffron);
+  background: rgba(232, 137, 61, 0.06);
+}
+.option-btn .option-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.option-btn.selected .option-indicator {
+  border-color: var(--saffron);
+  background: var(--saffron);
+}
+.option-btn.selected .option-indicator::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: white;
+}
+
+/* ====== NUMERIC INPUT ====== */
+.numeric-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.numeric-input {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 48px;
+  font-weight: 500;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid var(--border);
+  width: 120px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s;
+  padding: 8px 0;
+}
+.numeric-input:focus {
+  border-color: var(--saffron);
+}
+.numeric-input-label {
+  font-size: 16px;
+  color: var(--stone);
+}
+
+/* ====== EMAIL INPUT ====== */
+.email-gate {
+  animation: fadeIn 0.3s ease;
+}
+.email-gate-title {
+  font-size: clamp(26px, 3.5vw, 36px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.email-gate-sub {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--soft);
+  margin-bottom: 32px;
+  max-width: 520px;
+}
+.email-field {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.email-input {
+  flex: 1;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 15px;
+  padding: 14px 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.email-input:focus {
+  border-color: var(--saffron);
+}
+.email-input::placeholder {
+  color: var(--stone);
+}
+.newsletter-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 24px;
+  cursor: pointer;
+}
+.newsletter-checkbox input[type="checkbox"] {
+  margin-top: 3px;
+  accent-color: var(--saffron);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.newsletter-checkbox span {
+  font-size: 13px;
+  color: var(--soft);
+  line-height: 1.5;
+}
+.email-trust {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--stone);
+  margin-top: 20px;
+}
+
+/* ====== QUESTION NAVIGATION ====== */
+.question-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0 32px;
+}
+.back-btn {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--stone);
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+.back-btn:hover { color: var(--ink); }
+.back-btn:disabled { opacity: 0; cursor: default; }
+
+/* ====== CHECKPOINT ====== */
+.checkpoint {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 6vw, 80px) 0;
+  animation: fadeIn 0.3s ease;
+}
+.checkpoint-check {
+  font-size: 18px;
+  color: var(--celadon);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.checkpoint-summary {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--soft);
+  margin-bottom: 36px;
+  max-width: 520px;
+}
+.checkpoint-next-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--stone);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.checkpoint-next-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.checkpoint-next-desc {
+  font-size: 14px;
+  color: var(--soft);
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+/* ====== CALCULATION ANIMATION ====== */
+.calculation {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 0;
+}
+.calc-drivers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 400px;
+}
+.calc-driver {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  opacity: 0.2;
+  transition: all 0.3s ease;
+}
+.calc-driver.lit {
+  opacity: 1;
+  border-color: var(--saffron);
+  background: rgba(232, 137, 61, 0.06);
+}
+.calc-driver-id {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--saffron);
+  text-transform: uppercase;
+}
+.calc-driver-name {
+  font-size: 11px;
+  color: var(--soft);
+  text-align: center;
+}
+.calc-status {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.calc-status.visible {
+  opacity: 1;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 640px) {
+  .assessment-shell {
+    padding: 0 20px;
+  }
+  .email-field {
+    flex-direction: column;
+  }
+  .calc-drivers {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .option-btn {
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+}
