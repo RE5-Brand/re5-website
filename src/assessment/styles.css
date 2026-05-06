@@ -848,12 +848,22 @@ body {
   .email-field {
     flex-direction: column;
   }
+  .email-field .btn {
+    width: 100%;
+    text-align: center;
+    min-height: 48px;
+  }
+  .email-input {
+    min-height: 48px;
+    font-size: 16px; /* prevents iOS zoom */
+  }
   .calc-drivers {
     grid-template-columns: repeat(2, 1fr);
   }
   .option-btn {
     padding: 14px 16px;
     font-size: 14px;
+    min-height: 48px;
   }
   .driver-cards-grid {
     grid-template-columns: 1fr;
@@ -863,5 +873,55 @@ body {
   }
   .plan-item {
     gap: 12px;
+  }
+  .back-btn {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .btn {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .newsletter-checkbox {
+    padding: 8px 0;
+  }
+  .newsletter-checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+  }
+  .graph-container {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+  .results-page {
+    padding: 32px 0 60px;
+  }
+  .cta-btn {
+    width: 100%;
+    max-width: 320px;
+  }
+  .numeric-input {
+    font-size: 40px;
+    width: 100px;
+  }
+  .question-text {
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 380px) {
+  .calc-drivers {
+    gap: 8px;
+  }
+  .calc-driver {
+    padding: 12px 6px;
+  }
+  .calc-driver-name {
+    font-size: 10px;
   }
 }

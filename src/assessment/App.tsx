@@ -1,6 +1,9 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { Answers, Sex } from "../../lib/assessment/types";
 import { getQuestionsForSex, PART_NAMES } from "../../lib/assessment/questions";
+import { assignPhenotype } from "../../lib/assessment/phenotype";
+import { subscribeToKit } from "../../lib/assessment/kit";
+import { trackEvent } from "../../lib/assessment/analytics";
 import { Landing } from "./components/Landing";
 import { ProgressBar } from "./components/ProgressBar";
 import { Question } from "./components/Question";
@@ -22,9 +25,27 @@ export function App() {
   const [answers, setAnswers] = useState<Answers>({});
   const [email, setEmail] = useState("");
   const [newsletterOptin, setNewsletterOptin] = useState(false);
+  const resultsTracked = useRef(false);
 
   const sex = (answers["Q01_SEX"] as Sex) || "M";
   const questions = getQuestionsForSex(sex);
+
+  useEffect(() => {
+    if (screen.type === "results" && !resultsTracked.current) {
+      resultsTracked.current = true;
+      trackEvent("results_viewed");
+    }
+  }, [screen]);
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      if (screen.type === "question" || screen.type === "checkpoint" || screen.type === "email") {
+        trackEvent("assessment_abandoned", { last_screen: screen.type });
+      }
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [screen]);
 
   const setAnswer = useCallback(
     (questionId: string, value: string | number) => {
@@ -39,8 +60,8 @@ export function App() {
   const advanceFromQuestion = useCallback(
     (index: number) => {
       const q = questions[index];
+      trackEvent("question_answered", { question_id: q.id, question_index: index });
 
-      // Check if we just completed a part boundary
       if (q.part === 1 && index + 1 < questions.length && questions[index + 1].part === 2) {
         setScreen({ type: "checkpoint", afterPart: 1 });
         return;
@@ -78,7 +99,7 @@ export function App() {
 
   const continueFromCheckpoint = useCallback(
     (afterPart: 1 | 2) => {
-      // Find first question of the next part
+      trackEvent("checkpoint_reached", { part_completed: afterPart });
       const nextPart = (afterPart + 1) as 2 | 3;
       const idx = questions.findIndex((q) => q.part === nextPart);
       if (idx >= 0) {
@@ -92,10 +113,16 @@ export function App() {
     (emailValue: string, optin: boolean) => {
       setEmail(emailValue);
       setNewsletterOptin(optin);
-      setAnswers((prev) => ({ ...prev, Q26_EMAIL: emailValue }));
+      const updatedAnswers = { ...answers, Q26_EMAIL: emailValue };
+      setAnswers(updatedAnswers);
+
+      const phenotype = assignPhenotype(updatedAnswers);
+      subscribeToKit(emailValue, phenotype, optin);
+      trackEvent("email_submitted", { newsletter_optin: optin });
+
       setScreen({ type: "calculating" });
     },
-    []
+    [answers]
   );
 
   const showResults = useCallback(() => {
@@ -128,7 +155,10 @@ export function App() {
 
       <div className="assessment-shell">
         {screen.type === "landing" && (
-          <Landing onStart={() => setScreen({ type: "question", index: 0 })} />
+          <Landing onStart={() => {
+            trackEvent("assessment_started");
+            setScreen({ type: "question", index: 0 });
+          }} />
         )}
 
         {screen.type === "question" && currentQuestion && (() => {

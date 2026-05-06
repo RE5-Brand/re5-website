@@ -1,5 +1,6 @@
 import React from "react";
 import { PhenotypeResult } from "../../../lib/assessment/types";
+import { trackEvent } from "../../../lib/assessment/analytics";
 
 interface CTAProps {
   phenotype: PhenotypeResult;
@@ -36,7 +37,7 @@ export function CTA({ phenotype }: CTAProps) {
           your protocol. Stay on them, and revisit this assessment in 12 months
           to check your trajectory.
         </p>
-        <a href="/" className="btn btn-secondary cta-btn">
+        <a href="/" className="btn btn-secondary cta-btn" onClick={() => trackEvent("cta_clicked_secondary", { phenotype: "low_pressure" })}>
           Back to RE5
         </a>
       </section>
@@ -57,7 +58,7 @@ export function CTA({ phenotype }: CTAProps) {
           supportive habits above accelerate recovery once the trigger is
           addressed.
         </p>
-        <a href="/" className="btn btn-primary cta-btn">
+        <a href="/" className="btn btn-primary cta-btn" onClick={() => trackEvent("cta_clicked_primary", { phenotype: "stress_telogen" })}>
           Learn More About RE5
         </a>
       </section>
@@ -78,7 +79,7 @@ export function CTA({ phenotype }: CTAProps) {
           ? "You're already on pharmaceutical treatment. The RE5 Quick-Start Guide — Optimisation Track shows you how to build the full supporting protocol around what you're already taking, so every intervention reinforces the others."
           : `Based on your phenotype, stage, and treatment preferences, your matched entry point is the ${variantName} Quick-Start Guide. It covers exactly which interventions to start, in what order, and why — tailored to your firing drivers.`}
       </p>
-      <a href="/book.html" className="btn btn-primary cta-btn">
+      <a href="/book.html" className="btn btn-primary cta-btn" onClick={() => trackEvent("cta_clicked_primary", { phenotype: phenotype.phenotype, variant: variantName })}>
         Get Your Quick-Start Guide
       </a>
     </section>
