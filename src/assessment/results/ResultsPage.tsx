@@ -1,197 +1,173 @@
 import React from "react";
-import { Answers } from "../../../lib/assessment/types";
-import { calculateScores, getScoreBand, internalToDisplay, getSeverityLabel } from "../../../lib/assessment/scoring";
+import { Answers, DriverKey } from "../../../lib/assessment/types";
+import {
+  calculateScores,
+  getScoreBand,
+  internalToDisplay,
+  getSeverityLabel,
+  getSortedDrivers,
+  getFamilyHistoryPoints,
+} from "../../../lib/assessment/scoring";
 import { assignPhenotype } from "../../../lib/assessment/phenotype";
-import { getPercentile, getPercentileCopy } from "../../../lib/assessment/graphs";
+import {
+  GENERAL_PLAN_ITEMS,
+  PLAN_CLOSING_DEFAULT,
+  PLAN_CLOSING_LOW_PRESSURE,
+  PLAN_INTRO_STRESS_TELOGEN,
+} from "../../../lib/assessment/copy";
+import { HeadlineScore } from "./HeadlineScore";
+import { DriverCard } from "./DriverCard";
+import { PhenotypeBlock } from "./PhenotypeBlock";
+import { LossCurveGraph } from "./LossCurveGraph";
+import { PercentileGraph } from "./PercentileGraph";
+import { ConceptSolutionBlock } from "./ConceptSolutionBlock";
+import { GeneralPlanItem } from "./GeneralPlanItem";
+import { CTA } from "./CTA";
 
 interface ResultsPageProps {
   answers: Answers;
 }
 
-const DRIVER_LABELS: Record<string, string> = {
-  hormonal: "Hormonal",
-  inflammatory: "Inflammatory",
-  oxidative: "Oxidative",
-  vascular: "Vascular",
-  nutritional: "Nutritional",
-  fibrosis: "Fibrosis",
-  growth_signalling: "Growth Signal",
-  microenvironment: "Scalp",
-};
+const DRIVER_KEYS: DriverKey[] = [
+  "hormonal",
+  "inflammatory",
+  "oxidative",
+  "vascular",
+  "nutritional",
+  "fibrosis",
+  "growth_signalling",
+  "microenvironment",
+];
+
+const CONCEPT_THRESHOLD = 5;
 
 export function ResultsPage({ answers }: ResultsPageProps) {
   const scores = calculateScores(answers);
   const phenotype = assignPhenotype(answers);
   const band = getScoreBand(scores.headlineScore);
-  const percentile = getPercentile(scores.headlineScore);
+  const currentAge =
+    typeof answers["Q02_AGE"] === "number"
+      ? answers["Q02_AGE"]
+      : parseInt(answers["Q02_AGE"] as string, 10) || 30;
+  const familyHistoryPoints = getFamilyHistoryPoints(answers);
+
+  const sorted = getSortedDrivers(scores.drivers);
+  const elevatedDrivers = sorted.filter(
+    (d) => d.score >= CONCEPT_THRESHOLD
+  );
+
+  const showLossCurve = phenotype.specialCase !== "autoimmune";
+
+  const planClosing =
+    phenotype.specialCase === "low_pressure"
+      ? PLAN_CLOSING_LOW_PRESSURE
+      : PLAN_CLOSING_DEFAULT;
 
   return (
-    <div style={{ padding: "48px 0 80px" }}>
-      {/* Section 1 — Headline Score */}
-      <div className="eyebrow" style={{ marginBottom: 12 }}>
-        Your RE5 Hair Loss Risk Score
-      </div>
-      <div
-        style={{
-          fontSize: "clamp(56px, 8vw, 80px)",
-          fontWeight: 800,
-          letterSpacing: "-0.03em",
-          lineHeight: 1,
-          marginBottom: 8,
-        }}
-      >
-        {scores.headlineScore}{" "}
-        <span style={{ fontSize: "0.4em", color: "var(--stone)", fontWeight: 500 }}>
-          / 100
-        </span>
-      </div>
-      <div
-        className="mono"
-        style={{
-          fontSize: 13,
-          letterSpacing: "0.12em",
-          textTransform: "uppercase" as const,
-          color: "var(--stone)",
-          marginBottom: 8,
-        }}
-      >
-        {band}
-      </div>
+    <div className="results-page">
+      {/* 1 — Headline Score */}
+      <HeadlineScore score={scores.headlineScore} band={band} />
 
-      <div style={{ height: 1, background: "var(--border)", margin: "32px 0" }} />
+      <div className="results-divider" />
 
-      {/* Section 2 — Driver Cards (simplified for Phase 2) */}
-      <p style={{ fontSize: 14, color: "var(--soft)", marginBottom: 24 }}>
-        Your score is the sum of eight underlying biological drivers. Here's
-        how each is firing.
-      </p>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))",
-          gap: 10,
-          marginBottom: 40,
-        }}
-      >
-        {Object.entries(scores.drivers).map(([key, val]) => {
-          const display = internalToDisplay(val);
-          const severity = getSeverityLabel(display);
-          return (
-            <div
-              key={key}
-              style={{
-                background: "white",
-                border: "1px solid var(--border)",
-                borderRadius: 10,
-                padding: "18px 16px",
-              }}
-            >
-              <div
-                className="mono"
-                style={{
-                  fontSize: 10,
-                  letterSpacing: "0.12em",
-                  color: "var(--saffron)",
-                  textTransform: "uppercase" as const,
-                  marginBottom: 6,
-                }}
-              >
-                {DRIVER_LABELS[key] || key}
-              </div>
-              <div style={{ fontSize: 28, fontWeight: 700, marginBottom: 4 }}>
-                {display}
-                <span style={{ fontSize: 14, color: "var(--stone)", fontWeight: 400 }}>
-                  {" "}
-                  / 5
-                </span>
-              </div>
-              <div
-                className="mono"
-                style={{
-                  fontSize: 10,
-                  letterSpacing: "0.1em",
-                  color: "var(--stone)",
-                  textTransform: "uppercase" as const,
-                }}
-              >
-                {severity}
-              </div>
+      {/* 2 — Driver Cards */}
+      <section className="results-section">
+        <div className="eyebrow" style={{ marginBottom: 8 }}>
+          Your Eight Biological Drivers
+        </div>
+        <p className="results-lead">
+          Your score is the sum of eight underlying biological drivers. Here's
+          how each is firing.
+        </p>
+        <div className="driver-cards-grid">
+          {DRIVER_KEYS.map((key) => {
+            const display = internalToDisplay(scores.drivers[key]);
+            const severity = getSeverityLabel(display);
+            return (
+              <DriverCard
+                key={key}
+                driverKey={key}
+                displayScore={display}
+                severity={severity}
+              />
+            );
+          })}
+        </div>
+      </section>
+
+      <div className="results-divider" />
+
+      {/* 3 — Phenotype */}
+      <PhenotypeBlock phenotype={phenotype} />
+
+      <div className="results-divider" />
+
+      {/* 4 — Loss Curve Graph */}
+      {showLossCurve && (
+        <>
+          <LossCurveGraph
+            currentAge={currentAge}
+            phenotypeName={phenotype.phenotype}
+            stage={phenotype.stage}
+            variant={phenotype.variant}
+            familyHistoryPoints={familyHistoryPoints}
+          />
+          <div className="results-divider" />
+        </>
+      )}
+
+      {/* 5 — Percentile Graph */}
+      <PercentileGraph headlineScore={scores.headlineScore} />
+
+      <div className="results-divider" />
+
+      {/* 6 — Concept Solutions */}
+      {elevatedDrivers.length > 0 && (
+        <>
+          <section className="results-section">
+            <div className="eyebrow" style={{ marginBottom: 8 }}>
+              What to Address
             </div>
-          );
-        })}
-      </div>
-
-      <div style={{ height: 1, background: "var(--border)", margin: "32px 0" }} />
-
-      {/* Section 3 — Phenotype */}
-      <div className="eyebrow" style={{ marginBottom: 12 }}>
-        Your RE5 Phenotype
-      </div>
-      <div
-        style={{
-          fontSize: "clamp(24px, 3.5vw, 32px)",
-          fontWeight: 800,
-          lineHeight: 1.2,
-          letterSpacing: "-0.02em",
-          marginBottom: 20,
-        }}
-      >
-        {phenotype.phenotype}
-      </div>
-      {phenotype.specialCase && (
-        <div
-          className="mono"
-          style={{
-            fontSize: 11,
-            letterSpacing: "0.12em",
-            color: "var(--celadon)",
-            textTransform: "uppercase" as const,
-            marginBottom: 16,
-          }}
-        >
-          Special case: {phenotype.specialCase}
-        </div>
-      )}
-      {phenotype.variant && (
-        <div
-          style={{
-            fontSize: 15,
-            color: "var(--soft)",
-            lineHeight: 1.6,
-            marginBottom: 16,
-          }}
-        >
-          Recommended variant:{" "}
-          <strong style={{ color: "var(--ink)" }}>{phenotype.variant}</strong>
-        </div>
+            <p className="results-lead">
+              Concept-level solutions for your elevated drivers — the
+              principles behind what any effective protocol needs to do.
+            </p>
+            <div className="concept-solutions-list">
+              {elevatedDrivers.map((d) => (
+                <ConceptSolutionBlock key={d.key} driverKey={d.key} />
+              ))}
+            </div>
+          </section>
+          <div className="results-divider" />
+        </>
       )}
 
-      <div style={{ height: 1, background: "var(--border)", margin: "32px 0" }} />
+      {/* 7 — General Plan */}
+      <section className="results-section">
+        <div className="eyebrow" style={{ marginBottom: 8 }}>
+          The Six Foundations
+        </div>
+        {phenotype.specialCase === "stress_telogen" && (
+          <p className="results-lead plan-intro-stress">
+            {PLAN_INTRO_STRESS_TELOGEN}
+          </p>
+        )}
+        <p className="results-lead">
+          Six habits that support every hair protocol — regardless of your
+          phenotype.
+        </p>
+        <div className="plan-items-list">
+          {GENERAL_PLAN_ITEMS.map((item, i) => (
+            <GeneralPlanItem key={item.id} item={item} index={i} />
+          ))}
+        </div>
+        <p className="plan-closing">{planClosing}</p>
+      </section>
 
-      {/* Section 5 — Percentile */}
-      <div className="eyebrow" style={{ marginBottom: 12 }}>
-        Where You Sit
-      </div>
-      <div style={{ fontSize: 15, color: "var(--soft)", lineHeight: 1.65 }}>
-        {getPercentileCopy(percentile)}
-      </div>
+      <div className="results-divider" />
 
-      <div style={{ height: 1, background: "var(--border)", margin: "48px 0 32px" }} />
-
-      {/* Phase 3 placeholder */}
-      <div
-        className="mono"
-        style={{
-          fontSize: 11,
-          letterSpacing: "0.15em",
-          color: "var(--stone)",
-          textTransform: "uppercase" as const,
-          textAlign: "center" as const,
-          padding: "40px 0",
-        }}
-      >
-        Full results page (graphs, concept solutions, plan, CTA) — Phase 3
-      </div>
+      {/* 8 — CTA */}
+      <CTA phenotype={phenotype} />
     </div>
   );
 }
