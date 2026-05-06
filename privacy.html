@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — RE5</title>
+
+<!-- Favicon (uses the 育 seal as browser tab icon) -->
+<link rel="icon" type="image/svg+xml" href="assets/seal.svg">
+<link rel="apple-touch-icon" href="assets/seal.svg">
+
+<!-- Open Graph (Facebook, LinkedIn, iMessage, Slack) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://re5-website.vercel.app/privacy">
+<meta property="og:title" content="Privacy Policy — RE5">
+<meta property="og:description" content="How RE5 by Bald Research handles your information.">
+<meta property="og:image" content="https://re5-website.vercel.app/assets/book3.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="RE5 — Bald Research">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://re5-website.vercel.app/privacy">
+<meta name="twitter:title" content="Privacy Policy — RE5">
+<meta name="twitter:description" content="How RE5 by Bald Research handles your information.">
+<meta name="twitter:image" content="https://re5-website.vercel.app/assets/book3.jpg">
+
+<!-- Generic SEO -->
+<meta name="description" content="How RE5 by Bald Research handles your information.">
+<meta name="theme-color" content="#1A1A1A">
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAFAF7;
+    --ink: #1A1A1A;
+    --saffron: #E8893D;
+    --celadon: #2F5F6B;
+    --stone: #8A8578;
+    --soft: #5C5852;
+    --border: #E0DDD5;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    font-family: "Nunito Sans", sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .btn {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    padding: 14px 28px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  .btn-primary { color: var(--paper); background: var(--saffron); }
+  .btn-primary:hover { background: #D57A2F; transform: translateY(-1px); }
+
+  /* ====== TOP NAV ====== */
+  .top-nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: var(--paper);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 5vw;
+  }
+  .nav-left { display: flex; align-items: center; gap: 12px; }
+  .wordmark {
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -1px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .wordmark .five { color: var(--saffron); }
+  .nav-links { display: flex; align-items: center; gap: 24px; }
+  .nav-links a:not(.btn) {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--stone);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:not(.btn):hover { color: var(--ink); }
+  .nav-links .btn { padding: 10px 20px; font-size: 11px; }
+
+  /* ====== CONTENT ====== */
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: clamp(48px, 6vw, 80px) 5vw;
+  }
+  .content-eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--saffron);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .content h1 {
+    font-size: clamp(31px, 4.4vw, 46px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .content-date {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--stone);
+    margin-bottom: 48px;
+  }
+  .content-body p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--soft);
+    margin-bottom: 20px;
+  }
+  .content-body h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 40px;
+    margin-bottom: 16px;
+  }
+  .content-body .signature {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .content-body .signature span {
+    display: block;
+    font-weight: 400;
+    color: var(--stone);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  /* ====== FOOTER ====== */
+  footer {
+    padding: 40px 48px;
+    max-width: 1280px;
+    margin: 0 auto;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .footer-wordmark {
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+  }
+  .footer-wordmark .five { color: var(--saffron); }
+  .footer-tagline {
+    font-style: italic; font-size: 13px; color: var(--stone); margin-left: 16px;
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px; letter-spacing: 0.1em;
+    color: var(--stone); text-decoration: none; text-transform: uppercase;
+  }
+  .footer-links a:hover { color: var(--ink); }
+  .footer-copy {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px; letter-spacing: 0.15em; color: var(--stone);
+    width: 100%; text-align: center;
+    margin-top: 16px; padding-top: 16px;
+    border-top: 1px solid var(--border);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    .nav-links a:not(.btn) { display: none; }
+    footer { flex-direction: column; text-align: center; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="/" class="wordmark">RE<span class="five">5</span></a>
+  </div>
+  <div class="nav-links">
+    <a href="/book">Book</a>
+    <a href="/masterclass">Masterclass</a>
+    <a href="/book" class="btn btn-primary">Get the Book — $1</a>
+  </div>
+</nav>
+
+<main class="content">
+  <div class="content-eyebrow">Privacy Policy</div>
+  <h1>Privacy Policy</h1>
+  <div class="content-date">Last updated: November 2025</div>
+
+  <div class="content-body">
+    <p>Bald Research operates the RE5 brand and the website at re5-website.vercel.app (hereafter "the site"). This privacy policy explains what information we collect, how we use it, and your rights.</p>
+
+    <h2>1. Information We Collect</h2>
+    <p><strong>Email addresses</strong> — when you subscribe to receive the 8 Drivers Checklist or any other lead magnet, your email address is collected and stored in our email service provider (Kit / ConvertKit).</p>
+    <p><strong>Purchase information</strong> — when you buy a digital product through the site, your transaction is processed by Payhip and either Stripe or PayPal. We receive notification of the purchase including your email address. We do not store payment card details — these are handled by the payment processors.</p>
+    <p><strong>Browser information</strong> — basic anonymized analytics may be collected (page views, country, referrer) to help us understand which content is useful. We do not use cookies for tracking or advertising.</p>
+
+    <h2>2. How We Use Information</h2>
+    <p>We use your email address to deliver the lead magnet you subscribed to, to send the welcome email sequence about the RE5 framework, and occasionally to share educational content or product updates. You can unsubscribe at any time using the link at the bottom of any email.</p>
+    <p>Purchase information is used to deliver your purchased products and to provide customer support if you contact us about an order.</p>
+
+    <h2>3. Sharing of Information</h2>
+    <p>We do not sell, rent, or trade your information to third parties.</p>
+    <p>We share information only with the service providers necessary to operate the site:<br>
+    — Kit (ConvertKit) for email delivery<br>
+    — Payhip for digital product fulfillment<br>
+    — Stripe and PayPal for payment processing<br>
+    — Vercel for hosting</p>
+    <p>Each service has its own privacy policy that governs how they handle your data.</p>
+
+    <h2>4. Your Rights</h2>
+    <p>You have the right to:<br>
+    — Access the information we hold about you<br>
+    — Correct inaccurate information<br>
+    — Request deletion of your information<br>
+    — Unsubscribe from email at any time</p>
+    <p>To exercise any of these rights, email [your-contact-email-here].</p>
+
+    <h2>5. Data Retention</h2>
+    <p>We retain email subscriber information until you unsubscribe and request deletion. Purchase records are retained for tax and legal compliance reasons (typically 7 years in most jurisdictions).</p>
+
+    <h2>6. Changes to This Policy</h2>
+    <p>We may update this privacy policy. Significant changes will be communicated via email. The "Last updated" date at the top reflects the most recent revision.</p>
+
+    <h2>7. Contact</h2>
+    <p>For privacy questions, email [your-contact-email-here].</p>
+
+    <div class="signature">
+      — Solomon
+      <span>Founder, RE5</span>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div style="display:flex;align-items:center;flex-wrap:wrap;">
+    <div class="footer-wordmark">RE<span class="five">5</span></div>
+    <div class="footer-tagline">Less noise. More follicles.</div>
+  </div>
+  <div class="footer-links">
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="mailto:hello@re5.com">Contact</a>
+    <a href="/masterclass">Masterclass</a>
+  </div>
+  <div class="footer-copy">Published by Bald Research · © 2026 · RE5</div>
+</footer>
+
+</body>
+</html>
