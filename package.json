@@ -1,0 +1,27 @@
+{
+  "name": "re5-website",
+  "version": "1.0.0",
+  "description": "RE5 Brand Website — Book 3 landing page (index.html) and Masterclass landing page (masterclass.html, coming) for Bald Research. Built as static HTML, deployed to Vercel.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RE5-Brand/re5-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/RE5-Brand/re5-website/issues"
+  },
+  "homepage": "https://github.com/RE5-Brand/re5-website#readme",
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}
